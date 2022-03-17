@@ -3,11 +3,14 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import reportWebVitals from './reportWebVitals';
 import App from './App';
-import Login from './Login/Loginform'
+//import Login from './Login/Loginform'
+
 
 
 ReactDOM.render(
-  <Login/>,
+ 
+  
+  <App/>,
  
   document.getElementById("root")
 );
@@ -16,4 +19,5 @@ ReactDOM.render(
 // to log results (for example: reportWebVitals(console.log))
 // or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
 // <App/>,
+//<Login/>,
 reportWebVitals();

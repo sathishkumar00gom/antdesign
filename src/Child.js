@@ -2,7 +2,7 @@ import React from "react";
 
 
 export default function Child(props){
-    const changes=()=>{
+    const changes=()=> {
         props.changeName("hai child")
     }
     return(
