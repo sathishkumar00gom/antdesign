@@ -1,0 +1,72 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
+body{
+    
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    max-height: 100vh;
+    position: relative;
+    z-index: -1;
+    overflow-y: hidden;
+}
+
+.login-form-button{
+    width: 200px;
+}
+
+.register {
+    font-size: 20px;
+}
+
+.container{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 400px;
+    height: 100%;
+    background-color: blue;
+    border-radius: 10px;
+    box-shadow: 1px 1px 1px 1px black;
+    /* top: 50%;
+    left: 50px; */
+    /* position: relative; */
+}
+
+.register{
+    color: white;
+}
+
+.login-form-forgot{
+    color: white;
+}
+
+.remember{
+    color: white;
+}
+
+.heading{
+    background-color: white;
+   border-radius: 5px;
+   box-shadow: 2px 2px 2px 2px black;
+}
+
+.heading h1{
+    color: blue;
+    font-family: 'Segoe UI';
+}
+
+.or{
+    color: white;
+    padding: 10px;
+    font-size: 25px;
+}
+
+.ogin-form-button{
+    width: 100px;
+}
