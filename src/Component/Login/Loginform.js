@@ -7,6 +7,8 @@ import { PresetColorTypes } from 'antd/lib/_util/colors';
 import { useState } from 'react';
 
 
+
+
 export default function Login() {
     const [username, setUserName] = useState("")
     const [email, setEmail] = useState("")
@@ -73,10 +75,6 @@ if(newcheck){
 }
     };
 
-
-
-
-
     return (
         <>
             <div className='container'>
@@ -113,6 +111,7 @@ if(newcheck){
                 </Form>
 
             </div>
+           
         </>
     )
 }

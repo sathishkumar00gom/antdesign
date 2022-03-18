@@ -1,4 +1,4 @@
-*{
+/* *{
     margin: 0;
     padding: 0;
 }
@@ -7,8 +7,8 @@ body{
     align-items: center;
     justify-content: center;
     display: flex;
-    /* background-color: brown; */
-   background-image: url("photo-1557683316-973673baf926.jpeg"); 
+   
+   
    background-repeat: no-repeat;
    background-size: cover;
 }
@@ -19,6 +19,7 @@ body{
     background-color: white;
     border-radius: 20px;
     box-shadow: inset;
+    position: relative;
 }
 
 .container h1{
@@ -46,8 +47,11 @@ text-align: center;
 }
 
  .icons{
-    
-
     text-align: center;
-   
-} 
+    position: absolute;
+
+    bottom: 24px;
+    left: 50%;
+    transform: translateX(-50%);
+
+}  */

@@ -1,46 +1,58 @@
 import { Form, Button } from 'react-bootstrap';
-import 'bootstrap/dist/css/bootstrap.min.css';
 import './Registration.css';
 import { useState } from 'react';
-import Login from './Login/Loginform';
-
+import Login from '../Login/Loginform';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import{useNavigate} from "react-router-dom";
+ 
 function Registration() {
 
-  const [name, setName] = useState("")
-  const [email, setEmail] = useState("")
-  const [phoneNumber, setPhoneNumber] = useState("")
-  const [nationality, setNationality] = useState("")
-  const [address, setAddress] = useState("")
+  let Navigate=useNavigate()
+
+  // const [name, setName] = useState("")
+  // const [email, setEmail] = useState("")
+  // const [phoneNumber, setPhoneNumber] = useState("")
+  // const [nationality, setNationality] = useState("")
+  // const [address, setAddress] = useState("")
+  const [userData,setUserData]=useState({})
   const [error, setError] = useState("")
   const [Success, setSuccess] = useState("")
   const [change, setChange] = useState("sathish")
 
-  const enterusername = (e) => {
-    setName(e.target.value)
-    console.log(name);
+
+  const handlechange = (e)=>{
+    setUserData({
+      ...userData,
+      [e.target.name]:e.target.value,
+    })
   }
 
+
+  // const enterusername = (e) => {
+    
+  //   console.log(name);
+  // }
 
   // const entermail = (e) => {
   //   setEmail(e.target.Value)
   //   console.log(email);
   // }
 
-  const enterPhoneNumber = (e) => {
-    setPhoneNumber(e.target.Value)
-  }
+  // const enterPhoneNumber = (e) => {
+  //   setPhoneNumber(e.target.Value)
+  // }
 
-  const enterNationality = (e) => {
-    setNationality(e.target.value)
-  }
+  // const enterNationality = (e) => {
+  //   setNationality(e.target.value)
+  // }
 
-  const enterAddress = (e) => {
-    setAddress(e.target.value)
-  }
+  // const enterAddress = (e) => {
+  //   setAddress(e.target.value)
+  // }
 
   const validations=()=>{
     let checks=true
-    if (name === "") {
+    if (userData.name === "") {
       setError("please fill the username")
       checks=false
     }
@@ -49,7 +61,7 @@ function Registration() {
       setError('')
     }
 
-    if (email === "") {
+    if (userData.email === "") {
       setError("please fill the validmailid")
       checks=false
     }
@@ -58,7 +70,7 @@ function Registration() {
       setError('')
     }
 
-    if (phoneNumber=== "") {
+    if (userData.phoneNumber=== "") {
       setError("please enter the Phonenumber")
       checks=false
     }
@@ -67,7 +79,7 @@ function Registration() {
       setError('')
     }
 
-    if (nationality === "") {
+    if (userData.nationality === "") {
       setError("please enter the Nationality")
       checks=false
     }
@@ -77,7 +89,7 @@ function Registration() {
     }
 
 
-    if (address === "") {
+    if (userData.address === "") {
       setError("please fill the Address")
       checks=false
     }
@@ -86,24 +98,27 @@ function Registration() {
       setError('')
     }
 
-    setName('')
-    setEmail('')
-    setPhoneNumber('')
-    setNationality('')
-    setAddress('')
+    // setName('')
+    // setEmail('')
+    // setPhoneNumber('')
+    // setNationality('')
+    // setAddress('')
+    setUserData({})
     return checks
   }
 
 
-  const handleChange = (e) => {
+  const handlesubmit = (e) => {
+
+    Navigate('/a')
     e.preventDefault() 
     const check=validations()
-    console.log("sathis",email)
+    // console.log("sathis",email)
     if(check){
-      const FormData={
-        fname:name,
-        autoemail:email
-      };
+      const FormData=[{
+        fname:userData.name,
+        autoemail:userData.email
+      }];
       localStorage.setItem("RegisterData",JSON.stringify(FormData));
         setChange(false)
     }
@@ -111,8 +126,7 @@ function Registration() {
 
   return (
     <>
-      {
-        change ? (
+     
 
           <div className='container-fluid'>
             <h1>Registration Form</h1>
@@ -120,7 +134,7 @@ function Registration() {
             <Form>
               <Form.Group className="mb-3" controlId="formBasicFullname">
                 <Form.Label>Fullname</Form.Label>
-                <Form.Control value={name} type="text" placeholder="Enter Fullname" onChange={enterusername} />
+                <Form.Control value={userData.name} type="text" placeholder="Enter Fullname" onChange={handlechange} />
                 <div>{error && error}</div>
                 <div>{Success && Success}</div>
                 <Form.Text className="text-muted">
@@ -129,7 +143,7 @@ function Registration() {
               </Form.Group>
               <Form.Group className="mb-3" controlId="formBasicEmail">
                 <Form.Label>Email address</Form.Label>
-                <Form.Control type="email" value={email} placeholder="Enter email" onChange={(e)=>setEmail(e.target.value)} />
+                <Form.Control type="email" name='email' value={userData.email} placeholder="Enter email" onChange={handlechange} />
                 <div>{error && error}</div>
                 <div>{Success && Success}</div>
                 <Form.Text className="text-muted">
@@ -140,7 +154,7 @@ function Registration() {
               </Form.Group>
               <Form.Group className="mb-3" controlId="formBasicPhonenumber">
                 <Form.Label>Phonenumber</Form.Label>
-                <Form.Control type="number" placeholder="Enter Phonenumber" onChange={enterPhoneNumber} />
+                <Form.Control type="number" name='phonenumber' value={userData.phonenumber} placeholder="Enter Phonenumber" onChange={handlechange} />
                 <div>{error && error}</div>
                 <div>{Success && Success}</div><Form.Text className="text-muted">
 
@@ -148,7 +162,7 @@ function Registration() {
               </Form.Group>
               <Form.Group className="mb-3" controlId="formBasicEmail">
                 <Form.Label>Nationality</Form.Label>
-                <Form.Control type="text" placeholder="Enter Nationality" onChange={enterNationality} />
+                <Form.Control type="text" name='nationality' value={userData.nationality} placeholder="Enter Nationality" onChange={handlechange} />
 
                 <div>{error && error}</div>
                 <div>{Success && Success}</div><Form.Text className="text-muted">
@@ -157,7 +171,7 @@ function Registration() {
               </Form.Group>
               <Form.Group className="mb-3" controlId="formBasicEmail">
                 <Form.Label>Address</Form.Label>
-                <Form.Control type="text" placeholder="Enter Address" onChange={enterAddress}
+                <Form.Control type="text" name='address' value={userData.address} placeholder="Enter Address" onChange={handlechange}
                 />  <div>{error && error}</div>
                 <div>{Success && Success}</div>
                 <Form.Text className="text-muted">
@@ -165,14 +179,16 @@ function Registration() {
                 </Form.Text>
               </Form.Group>
               <div className='d-flex justify-content-center'>
-                <Button onClick={handleChange} className='button ' variant="light" type="submit" >
+                
+                <Button onClick={handlesubmit} className='button ' variant="light" type="submit" >
                   Submit
                 </Button>
+                
               </div>
             </Form>
           </div>
-        ) : <Login /> 
-}
+        
+
       </>
         
   );

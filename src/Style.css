@@ -1,4 +1,4 @@
-*{
+/* *{
     margin: 0;
     padding: 0;
     box-sizing: border-box;
@@ -36,9 +36,9 @@ body{
     /* top: 50%;
     left: 50px; */
     /* position: relative; */
-}
+/* } */
 
-.register{
+/* .register{
     color: white;
 }
 
@@ -69,4 +69,4 @@ body{
 
 .ogin-form-button{
     width: 100px;
-}
+} */ 
