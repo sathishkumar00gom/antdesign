@@ -2,28 +2,33 @@ import { Form, Input, Button } from 'antd';
 import { UserOutlined, LockOutlined, GoogleOutlined, TwitterOutlined, GooglePlusOutlined } from '@ant-design/icons';
 import { Row, Col } from 'antd';
 import { Divider } from 'antd';
-import './Login.css';
+import './Login.module.css';
 import { PresetColorTypes } from 'antd/lib/_util/colors';
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 
 
 
 export default function Login() {
-    const [username, setUserName] = useState("")
-    const [email, setEmail] = useState("")
+    const [userNameData, setUserNameData] = useState({
+        Fullname:"",
+        email:""
+    })
+
     const [error, setError] = useState("")
     const [Success, setSuccess] = useState("")
 
+    let Navigate=useNavigate()
 
-    const enterusername = (e) => {
-        setUserName(e.target.value)
+
+
+    const handlecanchange = (e) => {
+        setUserNameData({
+            ...userNameData,
+            [e.target.name]: e.target.value
+        });
     }
-
-    const enteremail = (e) => {
-        setEmail(e.target.value)
-    }
-
 
 
 
@@ -35,45 +40,52 @@ export default function Login() {
         e.preventDefault();
 
 
-        const ocheck = () => {
-            let action = true
-            if (username === "") {
-                setError("Pls enter Valid Name")
-                action = false
-            }
-            else {
-                setSuccess("Successfully name Validated")
-                setError('')
+        // const ocheck = () => {
+        //     let action = true
+        //     if (userNameData.username === "") {
+        //         setError("Pls enter Valid Name")
+        //         action = false
+        //     }
+        //     else {
+        //         setSuccess("Successfully name Validated")
+        //         setError('')
 
-            }
+        //     }
 
-            if (email === "") {
-                setError("Pls enter Valid password")
-                action = false
-            }
-            else {
-                setSuccess("Successfully password Validated")
-                setError('')
-            }
+        //     if (userNameData.email === "") {
+        //         setError("Pls enter Valid password")
+        //         action = false
+        //     }
+        //     else {
+        //         setSuccess("Successfully password Validated")
+        //         setError('')
+        //     }
 
-            setUserName("");
-            setEmail("");
-            return action
+        //     setUserNameData("");
+
+        //     return action
+        // }
+
+
+
+        let datas = localStorage.getItem("dada")
+        let newData = JSON.parse(datas) 
+        console.log("Main",newData)
+        console.log(userNameData.email,userNameData.Fullname)
+        let Card = newData.find((val) => val.Fullname === userNameData.Fullname && val.email === userNameData.email)
+        console.log(Card)
+        if (Card) {
+            alert("Successfully Validated")
+            localStorage.setItem("Card",JSON.stringify(Card))
+
+            Navigate('/b')
         }
+        else {
+            alert("sorry not valid details")
+        }
+    }
 
 
-        const newcheck = ocheck()
-if(newcheck){
-    let datas = localStorage.getItem("RegisterData")
-    let newData = JSON.parse(datas)
-    if(newData.fname === username && newData.autoemail === email){
-        console.log("ok success")
-    }
-    else{
-        console.log("baddd")
-    }
-}
-    };
 
     return (
         <>
@@ -81,9 +93,9 @@ if(newcheck){
                 <h1>LOGINFORM</h1>
                 <Form>
                     <Form.Item
-                        name="username">
-                        <label>username</label>
-                        <Input type="text" placeholder="Username" onChange={enterusername}></Input>
+                        name="fullname">
+                        <label>Fullname</label>
+                        <Input type="text" name="Fullname" value={userNameData.Fullname} placeholder="Fullname" onChange={handlecanchange}></Input>
                         <div >{error && error}</div>
                         <div>{Success && Success}</div>
 
@@ -92,8 +104,8 @@ if(newcheck){
                     <Form.Item
                         name="password">
                         <label>email</label>
-                        <Input type="email" placeholder="email"
-                            onChange={enteremail}
+                        <Input type="email" name="email" value={userNameData.email} placeholder="email"
+                            onChange={handlecanchange}
                         ></Input>
                         <div >{error && error}</div>
                         <div>{Success && Success}</div>
@@ -111,7 +123,7 @@ if(newcheck){
                 </Form>
 
             </div>
-           
+
         </>
     )
 }

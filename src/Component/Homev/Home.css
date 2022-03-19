@@ -1,0 +1,10 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+
+.container-fluid image{
+    background-repeat: no-repeat;
+    background-size: cover;
+   width: 300px;
+}
