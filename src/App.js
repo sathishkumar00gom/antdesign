@@ -7,7 +7,7 @@ import Registration from './Component/Registration/Registration';
 import Parent from "./Parent";
 import Home from "./Component/Homev/Home";
 //import "./Component/Login/Login.css";
-import Login from "./Component/Login/Loginform";
+import Loginform from "./Component/Login/Loginform";
 //import Component from "./Class/ClassComponent";
 
 
@@ -19,12 +19,13 @@ render(){
   <Router>
     <Routes>
       <Route exact path="/" element={<Registration />}/>
-        <Route exact path="/a" element={<Login />}/>
+        <Route exact path="/a" element={<Loginform/>}/>
         <Route exact path="/b" element={<Home/>}/>
 
 
         </Routes>
       </Router>
+      
     </>
     );
   }

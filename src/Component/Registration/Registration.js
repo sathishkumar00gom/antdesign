@@ -1,7 +1,7 @@
 import { Form, Button } from 'react-bootstrap';
 import './Registration.css';
 import { useState } from 'react';
-import Login from '../Login/Loginform';
+
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { useNavigate } from "react-router-dom";
 
@@ -55,10 +55,10 @@ function Registration() {
   const handlesubmit = (e) => {
     Navigate('/a')
     const validations = (e) => {
-      let checks = true
-      if (userData.name === "") {
+      
+      if (userData.fullname === "") {
         setError("please fill the username")
-        checks = false
+        
       }
       else {
         setSuccess("Succesfully Validate the Name")
@@ -67,7 +67,7 @@ function Registration() {
 
       if (userData.email === "") {
         setError("please fill the validmailid")
-        checks = false
+        
       }
       else {
         setSuccess("Succesfully Validate the email")
@@ -76,39 +76,40 @@ function Registration() {
 
       if (userData.phoneNumber === "") {
         setError("please enter the Phonenumber")
-        checks = false
+        
       }
       else {
         setSuccess("Succesfully Validate the Phonenumber")
         setError('')
       }
 
-      if (userData.nationality === "") {
-        setError("please enter the Nationality")
-        checks = false
+      if (userData.password === "") {
+        setError("please enter the password")
+        
       }
       else {
-        setSuccess("Succesfully Validate the Nationality")
+        setSuccess("correct password")
+        setError('')
+      }
+
+      if (userData.confirmpassword === "") {
+        setError("please enter the correct password")
+        
+      }
+      else {
+        setSuccess("correct confirm password")
         setError('')
       }
 
 
-      if (userData.address === "") {
-        setError("please fill the Address")
-        checks = false
-      }
-      else {
-        setSuccess("Succesfully Validate the Address")
-        setError('')
-      }
-
+      
       // setName('')
       // setEmail('')
       // setPhoneNumber('')
       // setNationality('')
       // setAddress('')
       setUserData('')
-      return checks
+      
     }
 
 
@@ -147,7 +148,7 @@ function Registration() {
         <Form>
           <Form.Group className="mb-3" controlId="formBasicFullname">
             <Form.Label>Fullname</Form.Label>
-            <Form.Control value={userData.Fullname} name="Fullname"type="text" placeholder="Enter Fullname" onChange={handlechange} />
+            <Form.Control value={userData.fullname} name="fullname"type="text" placeholder="Enter fullname" onChange={handlechange} />
             <div>{error && error}</div>
             <div>{Success && Success}</div>
             <Form.Text className="text-muted">
@@ -174,8 +175,8 @@ function Registration() {
             </Form.Text>
           </Form.Group>
           <Form.Group className="mb-3" controlId="formBasicEmail">
-            <Form.Label>Nationality</Form.Label>
-            <Form.Control type="text" name='nationality' value={userData.nationality} placeholder="Enter Nationality" onChange={handlechange} />
+            <Form.Label>Password</Form.Label>
+            <Form.Control type="password" name='password' value={userData.password} placeholder="Enter password" onChange={handlechange} />
 
             <div>{error && error}</div>
             <div>{Success && Success}</div><Form.Text className="text-muted">
@@ -183,8 +184,8 @@ function Registration() {
             </Form.Text>
           </Form.Group>
           <Form.Group className="mb-3" controlId="formBasicEmail">
-            <Form.Label>Address</Form.Label>
-            <Form.Control type="text" name='address' value={userData.address} placeholder="Enter Address" onChange={handlechange}
+            <Form.Label>Confirm password</Form.Label>
+            <Form.Control type="password" name='Confirm Password' value={userData.confirmpassword} placeholder="Enter Confirm password" onChange={handlechange}
             />  <div>{error && error}</div>
             <div>{Success && Success}</div>
             <Form.Text className="text-muted">
@@ -193,7 +194,7 @@ function Registration() {
           </Form.Group>
           <div className='d-flex justify-content-center'>
 
-            <Button onClick={handlesubmit} className='button ' variant="light" type="submit" >
+            <Button  onClick={handlesubmit} className='button' variant="primary" type="submit" >
               Submit
             </Button>
 
