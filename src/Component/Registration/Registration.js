@@ -180,7 +180,7 @@ function Registration() {
 
             <div>{error && error}</div>
             <div>{Success && Success}</div><Form.Text className="text-muted">
-
+    
             </Form.Text>
           </Form.Group>
           <Form.Group className="mb-3" controlId="formBasicEmail">

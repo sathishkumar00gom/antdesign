@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Table } from 'react-bootstrap';
+import "./Home.css"
 
 
 
@@ -26,6 +27,7 @@ const [Moxify,setMoxify]=useState([])
  console.log(Modify)
     return (
         <>
+        <div className="Nav">
         <nav className="navbar navbar-expand-lg navbar-light bg-primary">
   <div className="container-fluid">
     <a className="navbar-brand" ></a>
@@ -44,12 +46,13 @@ const [Moxify,setMoxify]=useState([])
       </ul>
       <form className="d-flex">
         <input className="form-control me-2" type="search" placeholder="Search" aria-label="Search" />
-        <button className="btn btn-outline-success" type="submit">Logout</button>
+        <button className="btn btn-danger" type="submit">Logout</button>
       </form>
     
     </div>
   </div>
 </nav>
+</div>
 {}
 <Table striped bordered hover>
   <thead>

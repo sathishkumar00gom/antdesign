@@ -1,14 +1,14 @@
+
+
+/* @media only screen and (min-width:600px){
+.container{
+   background-color: aqua;
+}
+} */
+
 /* *{
     margin: 0;
     padding: 0;
-}
-.container{
-    width: 300px;
-    height: 400x;
-    background-color: blue;
-    overflow-y: hidden;
-    border-radius: 10px;
-    box-shadow: 2px 2px 2px 2px black;
 }
 
 .button{
