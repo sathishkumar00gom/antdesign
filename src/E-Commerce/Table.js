@@ -3,14 +3,9 @@ import {Table} from "react-bootstrap"
 
 
 
-const Tabletime=()=>{
+const Tabletime=({reduerData})=>{
 
-
-
-    c
-
-
-    const [state, dispatch] = useReducer(reducer, []);
+  console.log('reducerData',reduerData)
 
     return(
         <Table striped bordered hover>
@@ -23,48 +18,13 @@ const Tabletime=()=>{
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td>1</td>
-            <td>Laptop</td>
-            <td>emi offer available upto 10,000</td>
-            
-          </tr>
-          
-          <tr>
-            <td>2</td>
-            <td>Bangle</td>
-            <td>emi offer available upto 500</td>
-          </tr>
-
-          <tr>
-            <td>3</td>
-            <td>Spectacles</td>
-            <td>emi offer available upto 999</td>
-          </tr>
-
-          <tr>
-            <td>4</td>
-            <td>Cycle</td>
-            <td>emi offer available upto 4999</td>
-          </tr>
-
-          <tr>
-            <td>5</td>
-            <td>cooker</td>
-            <td>emi offer available upto 2000</td>
-          </tr>
-
-          <tr>
-            <td>6</td>
-            <td>Furniture</td>
-            <td>emi offer available upto 10000</td>
-          </tr>
-
-          <tr>
-            <td>7</td>
-            <td>Bero</td>
-            <td>emi offer available upto 15000</td>
-          </tr>
+          {reduerData?.map(pro=>(
+            <tr>
+              <td>{pro.id}</td>
+              <td>{pro.name}</td>
+              <td>{pro.price}</td>
+            </tr>
+          ))}
         </tbody>
       </Table>
 )
