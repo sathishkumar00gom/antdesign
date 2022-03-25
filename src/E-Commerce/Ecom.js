@@ -1,4 +1,4 @@
-import React, { useReducer, useState } from "react";
+import React, { useEffect, useReducer, useState } from "react";
 import {
   Navbar, Nav, Form, InputGroup,
   FontAwesomeIcon, Carousel, Card, Button, Row, Col
@@ -6,6 +6,7 @@ import {
 import { ArrowRight, Laptop } from 'react-bootstrap-icons';
 import Tabletime from "./Table"
 import { Modal } from "react-bootstrap"
+import Modals from "./Modals";
 
 const reducer = (state, action) => {
   switch (action.type) {
@@ -18,58 +19,56 @@ const reducer = (state, action) => {
       return state.filter((product) => product.id !== action.payload)
 
     case "edit":
-      console.log("up", state)
+      console.log("updated data", state)
+      //findIndex
+      console.log(action)
+      let temp = state.findIndex((product) => product.id === action.payload.id)
+      state.splice(temp, 1, action.payload)
+      console.log("method", state)
       return state
-
-    // case 'edit':
-    // return{...[], action.payload}
-    // case "delete":
-    // return{...[], action.payload}
   }
 
 }
 
 
-const Ecom = () => {
-  //use state
+const Ecom = (props) => {
   const [reduerData, dispatch] = useReducer(reducer, [])
   const [show, setShow] = useState(false)
-  const [pass, setPass] = useState({})
-  const [data, setData] = useState({
-    id: 1,
-    name: pass.name,
-    price: pass.price
-  })
+  const [date, setDate] = useState({})
+  const [padge, setPadge] = useState("")
 
-  const handleinit = (e) => {
-    setData({ ...data, [e.target.name]: e.target.value })
+
+
+  const HandleDelete = (item, e) => {
+    e.preventDefault()
+    console.log("item", item)
+    dispatch({ type: 'Delete', payload: item.id })
   }
-  const handleUpdate = () => {
-    console.log('update data', data)
-    dispatch({ type: "edit", payload: data })
+  const HandleSubmit = (item, e) => {
+    e.preventDefault()
+    dispatch({ type: 'Add', payload: item })
+  }
+  const HandleEdit = (item) => {
+    console.log("item--==>", item)
+    handleOpen();
+    setDate(item)
+    setPadge(item)
+
+  }
+
+  const Passedupdate = (data) => {
+    console.log("date", data)
+
+    dispatch({ type: 'edit', payload: data })
+    setShow(false)
+  }
+
+  const handleOpen = () => {
+    setShow(true)
   }
   const handleClose = () => {
     setShow(false)
   }
-  const handleOpen = () => {
-    setShow(true)
-  }
-
-  const HandleDelete = (item, e) => {
-    e.preventDefault()
-
-    console.log("item", item)
-    dispatch({ type: 'Delete', payload: item.id })
-  }
-  const HandleSubmit = (item) => {
-    dispatch({ type: 'Add', payload: item })
-  }
-  const HandleEdit = (item, e) => {
-    console.log("edited=>", item)
-    handleOpen();
-    setPass(item)
-  }
-
 
   const product = [
 
@@ -130,7 +129,6 @@ const Ecom = () => {
 
 
 
-
   return (
     <>
       <Navbar bg="dark" variant="dark">
@@ -185,6 +183,7 @@ const Ecom = () => {
 
                 {
                   product.map((item) => {
+                    console.log("item--==>", item)
                     return (
                       <>
                         <Card style={{ width: '18rem' }}>
@@ -195,47 +194,29 @@ const Ecom = () => {
                               {item.name}
                             </Card.Text>
                             <p>{item.Price}</p>
-                            <Button onClick={() => HandleSubmit(item)} variant="primary">Add to Buy</Button>
+                            <Button onClick={(e) => HandleSubmit(item, e)} variant="primary">Add to Buy</Button>
                             <Button onClick={(e) => HandleDelete(item, e)} variant="danger">Delete</Button>
                             <Button onClick={(e) => HandleEdit(item, e)} variant="success">edit</Button>
-                            <Modal show={show} onHide={handleClose}>
-                              <Modal.Header closeButton>
-                                <Modal.Title>Product Details</Modal.Title>
-                              </Modal.Header>
-                              <Modal.Body>
-                                <Form>
-                                  <Form.Label>id</Form.Label>
-                                  <Form.Label>Product Name</Form.Label>
-                                  <Form.Control name="name" type="text" value={data.name} onChange={handleinit} placeholder="Product Name"></Form.Control>
-                                  <Form.Label>Product Price</Form.Label>
-                                  <Form.Control name="price" value={data.price} onChange={handleinit} type="number" placeholder="Product Price"></Form.Control>
-                                </Form>
-                              </Modal.Body>
-                              <Modal.Footer>
-                                <Button variant="secondary" onClick={handleClose}>
-                                  Close
-                                </Button>
-                                <Button variant="primary" onClick={handleUpdate}>
-                                  Update
-                                </Button>
-                              </Modal.Footer>
-                            </Modal>
 
 
                           </Card.Body>
                         </Card>
+
 
                       </>
                     )
                   })
                 }
 
+                <Modals model={show} close={handleClose}
+                  main={date} showcase={Passedupdate} />
+
 
               </Col>
             </Row>
 
           </Col>
-      
+
 
 
           <Col xs={6}>
