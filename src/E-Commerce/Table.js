@@ -12,17 +12,19 @@ const Tabletime=({reduerData})=>{
         <thead>
           <tr>
             <th>S.No</th>
-            <th>Product Name</th>
-            <th>Product Details</th>
+            <th>productId</th>
+            <th>ProductName</th>
+            <th>ProductDetails</th>
             
           </tr>
         </thead>
         <tbody>
-          {reduerData?.map(pro=>(
+          {reduerData?.map((pro,index)=>(
             <tr>
+              <td>{index+1}</td>
               <td>{pro.id}</td>
               <td>{pro.name}</td>
-              <td>{pro.price}</td>
+              <td>{pro.Price}</td>
             </tr>
           ))}
         </tbody>
