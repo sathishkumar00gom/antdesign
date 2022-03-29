@@ -1,4 +1,4 @@
-import React, { useEffect, useReducer, useState } from "react";
+import React, { createContext, useEffect, useReducer, useState } from "react";
 import {
   Navbar, Nav, Form, InputGroup,
   FontAwesomeIcon, Carousel, Card, Button, Row, Col
@@ -7,6 +7,10 @@ import { ArrowRight, Laptop } from 'react-bootstrap-icons';
 import Tabletime from "./Table"
 import { Modal } from "react-bootstrap"
 import Modals from "./Modals";
+
+
+
+
 
 const reducer = (state, action) => {
   switch (action.type) {
@@ -30,11 +34,13 @@ const reducer = (state, action) => {
 
 }
 
+export const fileContext = createContext({})
 
 const Ecom = (props) => {
   const [reduerData, dispatch] = useReducer(reducer, [])
   const [show, setShow] = useState(false)
   const [date, setDate] = useState({})
+  console.log("medium--==>", date)
   const [padge, setPadge] = useState("")
 
 
@@ -130,7 +136,8 @@ const Ecom = (props) => {
 
 
   return (
-    <>
+  
+    <fileContext.Provider value={{Tick:date}}>
       <Navbar bg="dark" variant="dark">
 
         <Navbar.Brand>Amazon</Navbar.Brand>
@@ -209,7 +216,7 @@ const Ecom = (props) => {
                 }
 
                 <Modals model={show} close={handleClose}
-                  main={date} showcase={Passedupdate} />
+                showcase={Passedupdate} />
 
 
               </Col>
@@ -231,7 +238,7 @@ const Ecom = (props) => {
 
 
       </div>
-    </>
+      </fileContext.Provider>
   )
 }
 export default Ecom
