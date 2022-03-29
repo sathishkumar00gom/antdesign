@@ -1,0 +1,21 @@
+.Main{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    
+}
+
+.Mainbody{
+    width: 150vh;
+    display: block;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column ;
+    position: relative;
+    padding-left: 25rem;
+}
+
+.btn-danger{
+    display: inline-block;
+}

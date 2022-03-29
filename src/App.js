@@ -11,30 +11,29 @@ import Home from "./Component/Homev/Home";
 import Loginform from "./Component/Login/Loginform";
 //import Component from "./Class/ClassComponent";
 import Media from "./Media Queries/CSS"
+import Create from "./Fetch and Axios/Create/Create";
+import Tables from "./Fetch and Axios/Read/Read";
 
 
-class App extends React.Component {
-render(){
-  return(
+const App = () => {
+  
+    return(
       <>
-      <Ecom/>
-      {/* <Media/>
-       {/*  */}
-  {/* <Router>
-    <Routes>
-      <Route exact path="/" element={<Registration />}/>
+    <Router>
+      <Routes>
+        {/* <Route exact path="/" element={<Registration />}/>
         <Route exact path="/a" element={<Loginform/>}/>
-        <Route exact path="/b" element={<Home/>}/>
+        <Route exact path="/b" element={<Home/>}/> */}
+        <Route exact path="/Crud" element={<Create />} />
+        <Route exact path="/Tables" element={<Tables />} />
+      </Routes>
+    </Router>
 
-
-        </Routes>
-      </Router> */}
-       
-    </>
+  </>
     );
   }
-}
-    export default App;
+
+export default App;
 
 
 
