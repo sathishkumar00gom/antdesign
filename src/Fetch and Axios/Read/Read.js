@@ -4,6 +4,10 @@ import { useEffect } from "react"
 import axios from "axios"
 import Create from "../Create/Create"
 import Example from "./Modalpopup"
+import Home from "../Home/Home"
+import { BrowserRouter,useNavigate } from "react-router-dom"
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 export const ACTION={
     GET_USER:"add-user",
@@ -14,59 +18,80 @@ export const ACTION={
 
 const reducer=(state,action)=>{
 
-        switch (action.type){
+ 
+        switch(action.type){
+           
             case ACTION.GET_USER:
-                return[...state,...action.payload]
+                return[...action.payload]
             
             case ACTION.DELETE_USER:
-                return state.filter((main)=>main.id!==action.payload.id)
+              return state.filter((main)=>main.id!==action.payload)
+               
 
             case ACTION.EDIT_USER:
                 console.log(action.payload,"action")
                 
                let org= state.findIndex((update)=>update.id===action.payload.id)
                state.splice(org,1,action.payload)
-               console.log(action.payload,"main")
-               return state
+               console.log(state,"main")
+               return [...state]
               
 
               
     }}
 
 const Tables = () => {
+    let navigate=useNavigate()
 
     const [modifydata,dispatch]=useReducer(reducer,[])
     const [show,setShow]=useState(false)
     const [value,setValue]=useState({})
     const [method,setMethod]=useState([])
+    const [error,setError]=useState(null)
     
 
     useEffect(()=>{
         if(modifydata.length>0){
         setMethod(modifydata)}
+        console.log(modifydata, "modifydata")
     },[modifydata])
+    console.log(modifydata, "moni")
 
-    useEffect(() => {
 
+
+    const get=()=>{
         axios.get("http://localhost:3006/posts")
             .then(getData => {
                 console.log("Seme", getData)
+                setError("")
                 dispatch({type:ACTION.GET_USER, payload: getData.data})
-            }).catch(err =>{console.log("err", err)})
+            })
+            .catch(err =>{
+                toast("sorry you can't edit without admin permission")
+                setError(err.message)
+            })
            
-            
-    }, [])
+        }  
 
-    const sentToApi = (data) => {
-        axios.post("http://localhost:3006/posts", data)
-            .then((res) => {
-                console.log("apipost", data)
-                dispatch({type:ACTION.POST_USER, payload:res.data})  
-            })
-            .catch((err) => {
-                console.log("err", err)
-            })
-    }
+    useEffect(() => {
+        get()
+    },[])
+
+
+
+     
+   
+
+    // const sentToApi = (data) => {
+    //     axios.post("http://localhost:3006/posts", data)
+    //         .then((res) => {
+    //             //console.log("apipost", data,res)
+    //             dispatch({type:ACTION.POST_USER, payload:res.data})  
+    //         })
+    //         .catch((err) => {
+    //             console.log("err", err)
+    //         })
+    // }
 
     const handleSubmit=(e,demy)=>{
         e.preventDefault();
@@ -74,9 +99,22 @@ const Tables = () => {
 
         .then(deleteData => {
             console.log("sama", deleteData)
-            dispatch({type:ACTION.DELETE_USER, payload: deleteData.demy})
+            setError("")
+            dispatch({type:ACTION.DELETE_USER, payload: demy})
         })
-        .catch(err =>{console.log("err", err)})
+        .catch(err =>{
+            toast("sorry you can't delete without admin permission")
+            setError(err.message)})
+            {error !== "" && <h1>err.message</h1>}
+            
+    }
+
+    const handleOpen=()=>{
+        setShow(true);
+    }
+
+    const handleClose=()=>{
+        setShow(false);
     }
 
     const handleSent=(e,demy)=>{
@@ -88,23 +126,28 @@ const Tables = () => {
     }
 
 
-    const Medium=(Mara)=>{
+    
+    
+ const Medium=(Mara)=>{
         console.log(Mara, "mdf")
         axios.put(`http://localhost:3006/posts/${Mara.id}`,Mara)
         .then(update=>{
+            
             console.log("update",update)
-            dispatch({type:ACTION.EDIT_USER, payload:update})
-        })
-        .catch(err => {console.log("err",err)})
-    }
+            setError("")
+            // dispatchtype:ACTION.EDIT_USER, payload:update})
+            get()
+          
+            .catch(err=>{
+                toast("sorry you can't edit without admin permission")
+                setError(err.message)
+            })
+            
+            
+        })}
+        
 
-    const handleOpen=()=>{
-        setShow(true);
-    }
-
-    const handleClose=()=>{
-        setShow(false);
-    }
+    
 
     const Mara=(migration)=>{
         Medium(migration)
@@ -114,10 +157,14 @@ const Tables = () => {
 
     
   
+     
+    
+  
 
 
     return (
         <>
+       <ToastContainer/>
         <Table striped bordered hover>
             <thead>
                 <tr>
@@ -140,6 +187,7 @@ const Tables = () => {
                             <td><Button className="btn-danger" 
                            onClick={(e)=>handleSubmit(e,demy.id)}>Delete</Button></td>
                             <td><Button className="btn-primary" 
+                          
                          
                          onClick={(e)=>handleSent(e,demy)}>Edit</Button></td></tr>
                          
@@ -151,14 +199,17 @@ const Tables = () => {
 
 
             </tbody>
+              {/* {error !== "" && <h1>err.message</h1>} */}
             <Example model={show} close={handleClose} moral={value}
             update={Mara}
                 />
         </Table>
-        <Create />
+        {/* <Button onClick={navigate("/Home")}>Sumbit</Button> */}
+        {/* <Create /> */}
+        
         </>
     )
-}
+            }
 
 export default Tables
 

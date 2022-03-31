@@ -6,13 +6,14 @@ import { BrowserRouter as Router, Routes, link, nav, Route, navlink, } from "rea
 //import "antd/dist/antd.css";
 import Registration from './Component/Registration/Registration';
 import Parent from "./Parent";
-import Home from "./Component/Homev/Home";
+// import Home from "./Component/Homev/Home";
 //import "./Component/Login/Login.css";
 import Loginform from "./Component/Login/Loginform";
 //import Component from "./Class/ClassComponent";
 import Media from "./Media Queries/CSS"
 import Create from "./Fetch and Axios/Create/Create";
 import Tables from "./Fetch and Axios/Read/Read";
+import Home from "./Fetch and Axios/Home/Home";
 
 
 const App = () => {
@@ -26,6 +27,7 @@ const App = () => {
         <Route exact path="/b" element={<Home/>}/> */}
         <Route exact path="/Crud" element={<Create />} />
         <Route exact path="/Tables" element={<Tables />} />
+        <Route exact path="/Home" element={<Home/>}/>
       </Routes>
     </Router>
 

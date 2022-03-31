@@ -2,16 +2,19 @@ import React, { useReducer, useState } from "react";
 import "./Create.css";
 import { Form, Button } from "react-bootstrap";
 import axios from "axios"
+import { useNavigate } from "react-router-dom";
 
-export const ACTION={
-POST_USER:"Post-user"}
+export const ACTION = {
+    POST_USER: "Post-user"
+}
+
+const reducer = (state, action) => {
 
 
-const reducer=(state,action)=>{
-      switch(action.type){
-          case ACTION.POST_USER:
-              return[...state,...action.payload]
-      }
+    switch (action.type) {
+        case ACTION.POST_USER:
+            return [action.payload]
+    }
 }
 
 
@@ -19,52 +22,48 @@ const reducer=(state,action)=>{
 
 
 
-const Create = () => {
 
-    const [modifydata,dispatch]=useReducer(reducer,[])
+const Create = (props) => {
+    let navigate = useNavigate()
 
-
-
-
-
+    const [modifydata, dispatch] = useReducer(reducer, [])
     const [data, setData] = useState({});
     console.log("dasa", data)
-
     const sentToApi = (e) => {
         e.preventDefault()
+
         axios.post("http://localhost:3006/posts", data)
+
             .then((res) => {
                 console.log("apipost", data)
-                dispatch({type:ACTION.POST_USER,payload:res.data})
-                
-                
+                dispatch({ type: ACTION.POST_USER, payload: res.data })
             })
+
             .catch((err) => {
                 console.log("err", err)
-            })
+            }
+            )
+
+        navigate('/Tables')
     }
 
-    //    const handleSubmit=(e)=>{
+
+
+    // const handleSubmit=(e)=>{
     //        e.preventDefault();
     //         let temp={
     //             id:Date.now(),
     //             name:data.name,
-    //             phonenumber:data.phonenumber,
-    //         }
-    //         sentToApi(temp)
+    //             phonenumber:data.phonenumber }
+    //        sentToApi(temp)
     //     }
-
     const handleChange = (e) => {
         setData({
             ...data,
             [e.target.name]: e.target.value,
         })
     }
-
-
     return (
-
-
         <>
             <h1 className="Main">
                 CRUD OPEARATION
@@ -85,8 +84,7 @@ const Create = () => {
                 <Button className="btn-danger" onClick={sentToApi}>Create  </Button>
 
             </Form>
-        </>
-    )
+        </>)
 }
 
-export default Create
+export default Create;
