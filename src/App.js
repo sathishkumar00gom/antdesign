@@ -14,6 +14,7 @@ import Media from "./Media Queries/CSS"
 import Create from "./Fetch and Axios/Create/Create";
 import Tables from "./Fetch and Axios/Read/Read";
 import Home from "./Fetch and Axios/Home/Home";
+import Update from "./Fetch and Axios/Updata/Update"
 
 
 const App = () => {
@@ -28,6 +29,7 @@ const App = () => {
         <Route exact path="/Crud" element={<Create />} />
         <Route exact path="/Tables" element={<Tables />} />
         <Route exact path="/Home" element={<Home/>}/>
+        <Route exact path="/Update/:id" element={<Update/>}/>
       </Routes>
     </Router>
 

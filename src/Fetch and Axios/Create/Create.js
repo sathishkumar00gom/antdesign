@@ -1,4 +1,4 @@
-import React, { useReducer, useState } from "react";
+import React, { useEffect, useReducer, useState } from "react";
 import "./Create.css";
 import { Form, Button } from "react-bootstrap";
 import axios from "axios"
@@ -13,7 +13,7 @@ const reducer = (state, action) => {
 
     switch (action.type) {
         case ACTION.POST_USER:
-            return [action.payload]
+            return [...action.payload]
     }
 }
 
@@ -29,6 +29,8 @@ const Create = (props) => {
     const [modifydata, dispatch] = useReducer(reducer, [])
     const [data, setData] = useState({});
     console.log("dasa", data)
+
+    
     const sentToApi = (e) => {
         e.preventDefault()
 

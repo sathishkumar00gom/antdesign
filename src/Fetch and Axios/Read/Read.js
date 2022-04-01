@@ -8,11 +8,12 @@ import Home from "../Home/Home"
 import { BrowserRouter,useNavigate } from "react-router-dom"
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import Update from "../Updata/Update"
 
 export const ACTION={
     GET_USER:"add-user",
     POST_USER:"Post-user",
-    EDIT_USER:"edit-user",
+    
     DELETE_USER:"delete-user"
 }
 
@@ -22,21 +23,11 @@ const reducer=(state,action)=>{
         switch(action.type){
            
             case ACTION.GET_USER:
+                console.log("actions+>",action)
                 return[...action.payload]
             
             case ACTION.DELETE_USER:
               return state.filter((main)=>main.id!==action.payload)
-               
-
-            case ACTION.EDIT_USER:
-                console.log(action.payload,"action")
-                
-               let org= state.findIndex((update)=>update.id===action.payload.id)
-               state.splice(org,1,action.payload)
-               console.log(state,"main")
-               return [...state]
-              
-
               
     }}
 
@@ -45,17 +36,11 @@ const Tables = () => {
 
     const [modifydata,dispatch]=useReducer(reducer,[])
     const [show,setShow]=useState(false)
-    const [value,setValue]=useState({})
     const [method,setMethod]=useState([])
     const [error,setError]=useState(null)
     
 
-    useEffect(()=>{
-        if(modifydata.length>0){
-        setMethod(modifydata)}
-        console.log(modifydata, "modifydata")
-    },[modifydata])
-    console.log(modifydata, "moni")
+   
 
 
 
@@ -95,7 +80,7 @@ const Tables = () => {
 
     const handleSubmit=(e,demy)=>{
         e.preventDefault();
-        axios.delete(`http://localhost:3006/posts/${demy}`)
+        axios.delete(`http://localhost:3006/post/${demy}`)
 
         .then(deleteData => {
             console.log("sama", deleteData)
@@ -109,50 +94,20 @@ const Tables = () => {
             
     }
 
-    const handleOpen=()=>{
-        setShow(true);
-    }
+const handleEdit=(id)=>{
+    navigate(`/Update/${id}`)
+   // setMethod({modifydata})
+}
 
-    const handleClose=()=>{
-        setShow(false);
-    }
-
-    const handleSent=(e,demy)=>{
-        e.preventDefault();
-        handleOpen();
-        setValue(demy);
-        Medium();
-       
-    }
-
-
-    
-    
- const Medium=(Mara)=>{
-        console.log(Mara, "mdf")
-        axios.put(`http://localhost:3006/posts/${Mara.id}`,Mara)
-        .then(update=>{
-            
-            console.log("update",update)
-            setError("")
-            // dispatchtype:ACTION.EDIT_USER, payload:update})
-            get()
-          
-            .catch(err=>{
-                toast("sorry you can't edit without admin permission")
-                setError(err.message)
-            })
-            
-            
-        })}
+const handleMethod=()=>{
+    navigate("/Crud")
+}
+ 
         
 
     
 
-    const Mara=(migration)=>{
-        Medium(migration)
-        setShow(false)
-    }
+    
   
 
     
@@ -176,7 +131,7 @@ const Tables = () => {
                 </tr>
             </thead>
             <tbody>
-                {method.map((demy) => {
+                {modifydata.map((demy) => {
                     return (
                        
                         <tr>
@@ -186,10 +141,7 @@ const Tables = () => {
                             <td>{demy.Phonenumber}</td>
                             <td><Button className="btn-danger" 
                            onClick={(e)=>handleSubmit(e,demy.id)}>Delete</Button></td>
-                            <td><Button className="btn-primary" 
-                          
-                         
-                         onClick={(e)=>handleSent(e,demy)}>Edit</Button></td></tr>
+                            <td><Button className="btn-primary" onClick={()=>handleEdit(demy.id)}>Edit</Button></td></tr>
                          
                         
                     )
@@ -199,13 +151,11 @@ const Tables = () => {
 
 
             </tbody>
-              {/* {error !== "" && <h1>err.message</h1>} */}
-            <Example model={show} close={handleClose} moral={value}
-            update={Mara}
-                />
-        </Table>
-        {/* <Button onClick={navigate("/Home")}>Sumbit</Button> */}
-        {/* <Create /> */}
+            
+            </Table>
+            <Button className="btn-primary" onClick={handleMethod}>Add User</Button>
+             
+        
         
         </>
     )
