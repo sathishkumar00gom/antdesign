@@ -15,6 +15,7 @@ import Create from "./Fetch and Axios/Create/Create";
 import Tables from "./Fetch and Axios/Read/Read";
 import Home from "./Fetch and Axios/Home/Home";
 import Update from "./Fetch and Axios/Updata/Update"
+import Userlist from "./HOC/HOC";
 
 
 const App = () => {
@@ -30,6 +31,7 @@ const App = () => {
         <Route exact path="/Tables" element={<Tables />} />
         <Route exact path="/Home" element={<Home/>}/>
         <Route exact path="/Update/:id" element={<Update/>}/>
+        <Route exact path="/hoc" element={<Userlist/>}/>
       </Routes>
     </Router>
 

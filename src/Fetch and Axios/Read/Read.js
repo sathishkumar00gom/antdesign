@@ -80,7 +80,7 @@ const Tables = () => {
 
     const handleSubmit=(e,demy)=>{
         e.preventDefault();
-        axios.delete(`http://localhost:3006/post/${demy}`)
+        axios.delete(`http://localhost:3006/posts/${demy}`)
 
         .then(deleteData => {
             console.log("sama", deleteData)
