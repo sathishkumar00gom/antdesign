@@ -16,6 +16,9 @@ import Tables from "./Fetch and Axios/Read/Read";
 import Home from "./Fetch and Axios/Home/Home";
 import Update from "./Fetch and Axios/Updata/Update"
 import Userlist from "./HOC/HOC";
+import Voot from "./Redux/Reduxui/Redux"
+import "./App.css"
+
 
 
 const App = () => {
@@ -27,11 +30,12 @@ const App = () => {
         {/* <Route exact path="/" element={<Registration />}/>
         <Route exact path="/a" element={<Loginform/>}/>
         <Route exact path="/b" element={<Home/>}/> */}
-        <Route exact path="/Crud" element={<Create />} />
+        {/* <Route exact path="/Crud" element={<Create />} />
         <Route exact path="/Tables" element={<Tables />} />
         <Route exact path="/Home" element={<Home/>}/>
         <Route exact path="/Update/:id" element={<Update/>}/>
-        <Route exact path="/hoc" element={<Userlist/>}/>
+        <Route exact path="/hoc" element={<Userlist/>}/> */}
+        <Route exact path="/Voot" element={<Voot/>}/>
       </Routes>
     </Router>
 

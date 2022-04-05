@@ -1,0 +1,39 @@
+/* *{
+    margin: 0px;
+    padding: 0px;
+} */
+
+.button {
+    display: flex;
+    flex-direction: column;
+   border-radius: 10px;
+   align-items: center;
+   justify-content: center;
+   padding: 5px;
+}
+.me-auto{
+    color: white;
+}
+
+/* .carousel{
+    display: flex;
+    flex-direction: row;
+}
+
+.card{
+   display: flex;
+   flex-direction: center;  
+}
+
+.cardimg{
+    display: flex;
+    border-radius: 75px;
+    box-shadow: 2px 2px 2px 2px(black);
+    border: 2px solid;
+} */
+
+
+.img{
+    border: 5px solid;
+    border-radius: 10px;
+}
