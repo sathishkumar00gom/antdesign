@@ -16,6 +16,7 @@
     "react-bootstrap": "^2.2.1",
     "react-bootstrap-icons": "^1.8.1",
     "react-dom": "^17.0.2",
+    "react-fontawesome": "^1.7.1",
     "react-multi-carousel": "^2.8.0",
     "react-redux": "^7.2.8",
     "react-router-dom": "^6.2.2",
@@ -23,6 +24,7 @@
     "react-slick": "^0.28.1",
     "react-toastify": "^8.2.0",
     "redux": "^4.1.2",
+    "redux-thunk": "^2.4.1",
     "slick-carousel": "^1.8.1",
     "web-vitals": "^2.1.4"
   },
@@ -49,5 +51,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "sonarqube-scanner": "^2.8.1"
   }
 }

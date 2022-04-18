@@ -1,28 +1,69 @@
-import React from "react";
+import React,{useEffect, useState} from "react";
 import {Nav, Button,Form, NavDropdown, Container, Navbar,
-     FormControl,Carousel, Card, CarouselItem } from "react-bootstrap"
-     import "./redux.css"
+     FormControl,Carousel, Card, CarouselItem, Row,Col } from "react-bootstrap"
+import "./redux.css"
 // import Slider from "react-slick";
 // import Carousel from 'react-multi-carousel';
 import 'react-multi-carousel/lib/styles.css';
+import { useDispatch, useSelector } from "react-redux";
+import axios from "axios";
+import { deleteproducts, fetchproducts,postproducts } from "../Action/Action";
+import { useNavigate } from "react-router-dom";
+import Add from "./createRedux"
 // import "slick-carousel/slick/slick.css"; 
 // import "slick-carousel/slick/slick-theme.css";
 
 
 
+
+
 const Voot=()=>{
-    
+  let navigate=useNavigate()
+  const [del,setDel]=useState('false')
 
-
-    // const settings = {
-    //     className: "center",
-    //     centerMode: true,
-    //     infinite: true,
-    //     centerPadding: "100px",
-    //     slidesToShow: 3,
-        
-    //   };
+  const products = useSelector((state)=> state.allproducts.products);
   
+ console.log(products,"man")
+//  const {id,title}=products;
+ const dispatch=useDispatch();
+
+
+ useEffect(()=>{
+  dispatch(fetchproducts())
+ },[dispatch]);
+ console.log("products", products)
+
+
+ useEffect(()=>{
+  dispatch(fetchproducts())
+ },[del,dispatch])
+
+ 
+const handleChange =()=>{
+ 
+  navigate("/Add")
+}
+const handleDelete=(product)=>{
+  dispatch(deleteproducts(product))
+  setDel(true)
+}
+  const handleEdit=()=>{
+    navigate("/edit")
+  }
+
+
+
+
+ 
+
+
+   
+  
+ 
+
+
+
+
 
     return(
         <>
@@ -118,6 +159,16 @@ const Voot=()=>{
   </Card>
   </Carousel.Item>
 
+
+ <Carousel.Item>
+  <Card>
+    <Card.Img  style={{width:"900px", padding:"10px"}} src="https://v3img.voot.com/resizeMedium,w_845,h_475/v3Storage/assets/tkks-18-ep-v3-1649165141656.jpg" />
+    <Card.Body>
+     
+    </Card.Body>
+  </Card>
+  </Carousel.Item>
+
     
 
 </Carousel>
@@ -131,11 +182,44 @@ const Voot=()=>{
     <Button className="btn-light">News</Button>
 </div>
 <div>
-    <Card>
-        <Card.Img className="img"style={{width:"300px", padding:"10px"}} src="https://v3img.voot.com/resizeMedium,w_810,h_1080/v3Storage/assets/brochara-3x4-1648897041731.jpg"/>
+<Button className="btn-primary" style={{width:"10rem"}} onClick={handleChange}>Add</Button>
+  {products && 
+  products.map((product)=>{
 
-        
-    </Card>
+return(
+  <Row>
+    <Col>
+   
+    
+
+ 
+    <Card 
+    style={{ width: "18rem"}}>
+    <Card.Img 
+     src={product.url}>
+    </Card.Img>
+    <Card.Body >
+    <div> {product.id}</div> 
+    <div> {product.Name}</div>
+    <div> {product.Releasedate}</div> 
+    
+    </Card.Body>
+
+    <Button className="btn-warning" style={{width:"10rem"}} onClick=
+    {()=>handleEdit(product.id)}>Edit</Button>
+    <Button className="btn-danger" style={{width:"10rem"}} onClick=
+    {()=>handleDelete(product.id)}>Delete</Button>
+
+                            {/* <td><Button className="btn-primary" onClick={()=>handleEdit(demy.id)}>Edit</Button></td></tr> */}
+   
+  </Card>
+ 
+  </Col>
+  </Row>
+  )
+})}
+
+   
 </div>
 
 

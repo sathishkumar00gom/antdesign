@@ -204,7 +204,7 @@ const Ecom = (props) => {
                             <p>{item.Price}</p>
                             <Button onClick={(e) => HandleSubmit(item, e)} variant="primary">Add to Buy</Button>
                             <Button onClick={(e) => HandleDelete(item, e)} variant="danger">Delete</Button>
-                            <Button onClick={(e) => HandleEdit(item, e)} variant="success">edit</Button>
+                            <Button onClick={() => HandleEdit(item )} variant="success">edit</Button>
 
 
                           </Card.Body>

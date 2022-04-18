@@ -38,7 +38,7 @@ const Create = (props) => {
 
             .then((res) => {
                 console.log("apipost", data)
-                dispatch({ type: ACTION.POST_USER, payload: res.data })
+                dispatch({ type: ACTION.POST_USER, payload: res.data }) 
             })
 
             .catch((err) => {

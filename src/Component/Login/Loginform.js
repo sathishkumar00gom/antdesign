@@ -98,15 +98,15 @@ export default function Login() {
                     <label>Email address</label>
                     <input type="email" value={userNameData.email} name="email"className="form-control" placeholder="Enter email" onChange={handlechange}/>
                 </div>
-                <p>{Success && Success}</p>
-                <p>{error && error}</p>
+                <p>{Success}</p>
+                <p>{error}</p>
 
 
                 <div className="form-group">
                     <label>Password</label>
                     <input type="password" value={userNameData.password} name="password"className="form-control" placeholder="Enter password"onChange={handlechange} />
-                    <p>{Success && Success}</p>
-                <p>{error && error}</p>
+                    <p>{Success}</p>
+                <p>{error}</p>
 
                 </div>
 
@@ -114,8 +114,8 @@ export default function Login() {
                     <label>Confirm Password</label>
                     <input type="password" value={userNameData.confirmpassword} name="confirmpassword" className="form-control" placeholder="Enter Confirm password"onChange={handlechange} />
                 </div>
-                <p>{Success && Success}</p>
-                <p>{error && error}</p>
+                <p>{Success}</p>
+                <p>{error}</p>
 
 
                 <div className="form-group">
