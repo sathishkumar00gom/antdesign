@@ -21,8 +21,8 @@ const Add=()=>{
 
     const handleUpdate=(e)=>{
     e.preventDefault()
-            dispatch (postproducts(change))
-            // navigate("/voot")
+            dispatch (postproducts(change,navigate))
+            navigate("/voot")
            
           
     }

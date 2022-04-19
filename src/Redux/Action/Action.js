@@ -30,6 +30,7 @@ export const postproducts=(data)=>{
             type:ActionTypes.SELECTED_PRODUCTS,
             payload: res.data
         }) 
+       // navigate("/voot")
         .catch((err)=>{
             console.log("err",err)
           }); 
@@ -54,11 +55,11 @@ export const deleteproducts=(product)=>{
     })}
 }
 
-export const editproducts=(product)=>{
+export const editpremium=(Premium)=>{
 
     return async (dispatch)=>{
     await axios
-    .delete(`http://localhost:3006/products/${product.id}`)
+    .put(`http://localhost:3008/premium/${Premium.id}`)
 
     .then(editData => {
         console.log("sama", editData)

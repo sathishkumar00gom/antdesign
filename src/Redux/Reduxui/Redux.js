@@ -21,7 +21,7 @@ const Voot=()=>{
   let navigate=useNavigate()
   const [del,setDel]=useState('false')
 
-  const products = useSelector((state)=> state.allproducts.products);
+  let products = useSelector((state)=> state.allproducts.products);
   
  console.log(products,"man")
 //  const {id,title}=products;
@@ -47,8 +47,8 @@ const handleDelete=(product)=>{
   dispatch(deleteproducts(product))
   setDel(true)
 }
-  const handleEdit=()=>{
-    navigate("/edit")
+  const handleEdit=(products)=>{
+    navigate(`/edit/${products}`)
   }
 
 
@@ -82,9 +82,9 @@ const handleDelete=(product)=>{
     <Nav.Link href="#features"></Nav.Link>
     <Nav.Link href="#features"></Nav.Link>
     <Nav.Link href="#features"></Nav.Link>
-      <Nav.Link style={{color:"white"}} href="#features">My Voot</Nav.Link>
-      <Nav.Link style={{color:"white"}} href="#pricing">Premium</Nav.Link>
-      <Nav.Link style={{color:"white"}} href="#features">Sports</Nav.Link>
+      <Nav.Link style={{color:"white"}} href="/voot">My Voot</Nav.Link>
+      <Nav.Link style={{color:"white"}} href="/premium">Premium</Nav.Link>
+      <Nav.Link style={{color:"white"}} href="/Sports">Sports</Nav.Link>
       <Nav.Link style={{color:"white"}} href="#pricing">Shows</Nav.Link>
       <Nav.Link style={{color:"white"}} href="#pricing">Movies</Nav.Link>
       <Nav.Link style={{color:"white"}} href="#pricing">Channels</Nav.Link>
@@ -183,9 +183,7 @@ const handleDelete=(product)=>{
 </div>
 <div>
 <Button className="btn-primary" style={{width:"10rem"}} onClick={handleChange}>Add</Button>
-  {products && 
-  products.map((product)=>{
-
+  {products && products.length >0 && products.map((product)=>{
 return(
   <Row>
     <Col>
