@@ -1,6 +1,5 @@
-import React, { useEffect,useContext } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { Modal, Form, Button } from 'react-bootstrap';
-import { useState } from 'react';
 import { fileContext } from './Ecom';
 
 
@@ -8,9 +7,9 @@ import { fileContext } from './Ecom';
 const Modals = (props) => {
 
 
-  const Mainfile= useContext(fileContext);
+    const Mainfile = useContext(fileContext);
 
-  console.log("Mains", Mainfile.name)
+    console.log("Mains", Mainfile.name)
     console.log("pro", props.main)
     const initial = {
         id: Mainfile.Tick.id,
@@ -19,7 +18,7 @@ const Modals = (props) => {
     }
 
     const [data, setData] = useState(initial)
-    const [edit, setEdit] = useState(false)
+
 
 
     useEffect(() => {
@@ -31,7 +30,7 @@ const Modals = (props) => {
 
     }, [Mainfile.Tick])
 
-    const handleinit = (e) => {
+    const handleinit = (_e) => {
         setData({ ...data, [e.target.name]: e.target.value })
     }
     const handleUpdate = (e) => {

@@ -1,4 +1,4 @@
-import React, { useEffect, useReducer, useState } from "react";
+import React, { useReducer, useState } from "react";
 import "./Create.css";
 import { Form, Button } from "react-bootstrap";
 import axios from "axios"
@@ -8,7 +8,7 @@ export const ACTION = {
     POST_USER: "Post-user"
 }
 
-const reducer = (state, action) => {
+const reducer = (_state, action) => {
 
 
     switch (action.type) {
@@ -23,14 +23,14 @@ const reducer = (state, action) => {
 
 
 
-const Create = (props) => {
+const Create = (_props) => {
     let navigate = useNavigate()
 
-    const [modifydata, dispatch] = useReducer(reducer, [])
+
     const [data, setData] = useState({});
     console.log("dasa", data)
 
-    
+
     const sentToApi = (e) => {
         e.preventDefault()
 
@@ -38,7 +38,7 @@ const Create = (props) => {
 
             .then((res) => {
                 console.log("apipost", data)
-                dispatch({ type: ACTION.POST_USER, payload: res.data }) 
+                dispatch({ type: ACTION.POST_USER, payload: res.data })
             })
 
             .catch((err) => {
@@ -49,16 +49,6 @@ const Create = (props) => {
         navigate('/Tables')
     }
 
-
-
-    // const handleSubmit=(e)=>{
-    //        e.preventDefault();
-    //         let temp={
-    //             id:Date.now(),
-    //             name:data.name,
-    //             phonenumber:data.phonenumber }
-    //        sentToApi(temp)
-    //     }
     const handleChange = (e) => {
         setData({
             ...data,

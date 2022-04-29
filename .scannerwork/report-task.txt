@@ -2,5 +2,5 @@ projectKey=antdesign
 serverUrl=http://localhost:9000
 serverVersion=9.4.0.54424
 dashboardUrl=http://localhost:9000/dashboard?id=antdesign
-ceTaskId=AYA9K738mq86E3xTc0KG
-ceTaskUrl=http://localhost:9000/api/ce/task?id=AYA9K738mq86E3xTc0KG
+ceTaskId=AYBrYPpoUG89wsi7_hhQ
+ceTaskUrl=http://localhost:9000/api/ce/task?id=AYBrYPpoUG89wsi7_hhQ

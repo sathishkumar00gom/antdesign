@@ -1,11 +1,9 @@
-import React, { createContext, useEffect, useReducer, useState } from "react";
+import React, { createContext, useReducer, useState } from "react";
 import {
-  Navbar, Nav, Form, InputGroup,
-  FontAwesomeIcon, Carousel, Card, Button, Row, Col
+  Navbar, Nav, Form,
+  Button, Row, Col
 } from "react-bootstrap";
-import { ArrowRight, Laptop } from 'react-bootstrap-icons';
-import Tabletime from "./Table"
-import { Modal } from "react-bootstrap"
+import Tabletime from "./Tabletime"
 import Modals from "./Modals";
 
 
@@ -17,7 +15,7 @@ const reducer = (state, action) => {
     case 'Add':
       console.log("up", state)
       return [...state, action.payload]
-    default:
+
       return state
     case "Delete":
       return state.filter((product) => product.id !== action.payload)
@@ -37,12 +35,12 @@ const reducer = (state, action) => {
 
 export const fileContext = createContext({})
 
-const Ecom = (props) => {
+const Ecom = (_props) => {
   const [reduerData, dispatch] = useReducer(reducer, [])
   const [show, setShow] = useState(false)
   const [date, setDate] = useState({})
   console.log("medium--==>", date)
-  const [padge, setPadge] = useState("")
+
 
 
 
@@ -137,8 +135,8 @@ const Ecom = (props) => {
 
 
   return (
-  
-    <fileContext.Provider value={{Tick:date}}>
+
+    <fileContext.Provider value={{ Tick: date }}>
       <Navbar bg="dark" variant="dark">
 
         <Navbar.Brand>Amazon</Navbar.Brand>
@@ -204,7 +202,7 @@ const Ecom = (props) => {
                             <p>{item.Price}</p>
                             <Button onClick={(e) => HandleSubmit(item, e)} variant="primary">Add to Buy</Button>
                             <Button onClick={(e) => HandleDelete(item, e)} variant="danger">Delete</Button>
-                            <Button onClick={() => HandleEdit(item )} variant="success">edit</Button>
+                            <Button onClick={() => HandleEdit(item)} variant="success">edit</Button>
 
 
                           </Card.Body>
@@ -217,7 +215,7 @@ const Ecom = (props) => {
                 }
 
                 <Modals model={show} close={handleClose}
-                showcase={Passedupdate} />
+                  showcase={Passedupdate} />
 
 
               </Col>
@@ -239,7 +237,7 @@ const Ecom = (props) => {
 
 
       </div>
-      </fileContext.Provider>
+    </fileContext.Provider>
   )
 }
 export default Ecom
